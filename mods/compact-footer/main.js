@@ -1,0 +1,31 @@
+// Modified from Herdr's workspace-chrome mod for herdquarters: compact footer.
+import { View, div, svg } from "gpui-kit";
+import { h_flex, v_flex } from "gpui-base";
+import { theme, run, updates, layout } from "herdr";
+
+function find(node, id) {
+  if (node?.id === id) return node;
+  for (const child of node?.children ?? []) {
+    const found = find(child, id);
+    if (found) return found;
+  }
+  return null;
+}
+
+// The sidebar's rail goes by its width, not a flag: dragging its edge narrows it too.
+const narrow = () => (find(layout(), "sidebar")?.size?.px ?? Infinity) < 160;
+
+export default class CompactFooter extends View {
+  render() {
+    const t = theme();
+    const collapsed = narrow();
+    const row = (id, icon, label, dim, action) => h_flex().id(id).h(28).px(collapsed ? 8 : 12).gap(9).items_center()
+      .text_color(dim ? t.dim : t.muted).hover(s => s.bg(t.hover).text_color(t.foreground)).cursor_pointer()
+      .on_click(action).child(svg(`mods/workspace-chrome/${icon}.svg`).size(14))
+      .when(!collapsed, el => el.child(label));
+    return v_flex().size_full().bg(t.chrome).border_t(1).border_color(t.border).py(4).gap(4).text_size(13)
+      .child(row("settings", "settings", "Settings", false, () => run("app.settings"))
+        .when(Boolean(updates().app.ready), el => el.child(div().size(6).rounded_full().bg(t.accent))))
+      .child(row("machine", "plus", "Add machine", true, () => run("mod.open", { name: "machine-add" })));
+  }
+}

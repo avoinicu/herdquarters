@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <rect width="960" height="600" fill="#011627"/>
+  <rect width="205" height="600" fill="#01111d"/>
+  <rect x="205" y="0" width="110" height="45" fill="#0b253a"/>
+  <path d="M205 0v600M0 245h205M0 531h205M205 45h755M205 572h755" stroke="#234d70"/>
+  <g font-family="monospace" font-size="12" fill="#89a4bb">
+    <text x="20" y="29" fill="#d6deeb">Herdr</text>
+    <text x="12" y="68">Spaces</text>
+    <text x="12" y="270">Agents</text>
+    <text x="12" y="301">project</text>
+    <text x="12" y="325">Assistant</text>
+    <text x="12" y="350">Terminal</text>
+    <text x="12" y="553">Settings</text>
+    <text x="12" y="581">Add machine</text>
+    <text x="218" y="591">This computer</text>
+  </g>
+  <rect x="0" y="80" width="205" height="27" fill="#1d3b53"/>
+  <g font-family="monospace" font-size="13" fill="#d6deeb">
+    <text x="12" y="98">project</text>
+    <text x="12" y="131">workspace</text>
+    <text x="219" y="28">Terminal</text>
+    <text x="330" y="28" fill="#89a4bb">Assistant</text>
+    <text x="219" y="68">shell</text>
+    <text x="224" y="112" fill="#7fdbca">$</text>
+    <text x="240" y="112">Ready to work</text>
+  </g>
+  <path d="M205 80h755" stroke="#234d70"/>
+  <circle cx="184" cy="321" r="3" fill="none" stroke="#89a4bb"/>
+  <circle cx="184" cy="346" r="3" fill="none" stroke="#89a4bb"/>
+</svg>
