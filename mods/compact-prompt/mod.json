@@ -1,0 +1,8 @@
+{
+  "place": "none",
+  "title": "Prompt",
+  "cloned_from": {
+    "name": "prompt",
+    "version": "0.1.11"
+  }
+}

@@ -12,6 +12,8 @@ import zlib
 ROOT = Path(__file__).resolve().parent.parent
 BUILT_INS = {"workspace-chrome", "workspace-status", "pane", "files", "changes"}
 CUSTOM = {"compact-spaces", "compact-agents", "compact-footer", "compact-tabs"}
+OVERLAYS = {"compact-menu", "compact-new-menu", "compact-worktree",
+            "compact-machine-add", "compact-prompt", "compact-confirm"}
 
 
 class LayoutTests(unittest.TestCase):
@@ -45,7 +47,8 @@ class LayoutTests(unittest.TestCase):
         ET.parse(ROOT / layout["preview"])
         self.assertEqual(layout["theme"], {"light": "paper", "dark": "night-owl"})
         self.assertEqual(layout["cloned_from"], {"name": "main", "version": "0.1.9"})
-        for mod in CUSTOM:
+        self.assertEqual(layout["terminal_menu"], "compact-menu")
+        for mod in CUSTOM | OVERLAYS:
             folder = ROOT / "mods" / mod
             manifest = json.loads((folder / "mod.json").read_text())
             self.assertEqual(manifest["place"], "none")

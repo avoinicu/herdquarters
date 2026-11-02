@@ -1,7 +1,7 @@
 // Modified from Herdr's workspace-chrome mod for herdquarters: compact footer.
 import { View, div, svg } from "gpui-kit";
 import { h_flex, v_flex } from "gpui-base";
-import { theme, run, updates, layout } from "herdr";
+import { theme, run, openOverlay, updates, layout } from "herdr";
 
 function find(node, id) {
   if (node?.id === id) return node;
@@ -26,6 +26,6 @@ export default class CompactFooter extends View {
     return v_flex().size_full().bg(t.chrome).border_t(1).border_color(t.border).py(4).gap(4).text_size(13)
       .child(row("settings", "settings", "Settings", false, () => run("app.settings"))
         .when(Boolean(updates().app.ready), el => el.child(div().size(6).rounded_full().bg(t.accent))))
-      .child(row("machine", "plus", "Add machine", true, () => run("mod.open", { name: "machine-add" })));
+      .child(row("machine", "plus", "Add machine", true, () => openOverlay({ mod: "compact-machine-add", kind: "dialog", frame: "none", width: 560 })));
   }
 }

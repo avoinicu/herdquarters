@@ -5,7 +5,11 @@ set -eu
 here=$(cd "$(dirname "$0")" && pwd)
 home="${HERDR_APP_HOME:-$HOME/.config/herdr-app}"
 
-for mod in compact-spaces compact-agents compact-footer compact-tabs; do
+mods='compact-spaces compact-agents compact-footer compact-tabs
+compact-menu compact-new-menu compact-worktree compact-machine-add
+compact-prompt compact-confirm'
+
+for mod in $mods; do
   if { [ -e "$home/mods/$mod" ] || [ -L "$home/mods/$mod" ]; } && { [ ! -f "$home/mods/$mod/main.js" ] || [ ! -f "$home/mods/$mod/mod.json" ]; }; then
     echo "conflict: $home/mods/$mod already exists; nothing installed" >&2
     exit 1
@@ -14,15 +18,13 @@ done
 
 files='themes/night-owl.json
 layouts/herdquarters.json
-layouts/herdquarters.svg
-mods/compact-spaces/main.js
-mods/compact-spaces/mod.json
-mods/compact-agents/main.js
-mods/compact-agents/mod.json
-mods/compact-footer/main.js
-mods/compact-footer/mod.json
-mods/compact-tabs/main.js
-mods/compact-tabs/mod.json'
+layouts/herdquarters.svg'
+
+for mod in $mods; do
+  files="$files
+mods/$mod/main.js
+mods/$mod/mod.json"
+done
 
 for file in $files; do
   if { [ -e "$home/$file" ] || [ -L "$home/$file" ]; } && ! cmp -s "$here/$file" "$home/$file"; then
@@ -31,7 +33,8 @@ for file in $files; do
   fi
 done
 
-mkdir -p "$home/themes" "$home/layouts" "$home/mods/compact-spaces" "$home/mods/compact-agents" "$home/mods/compact-footer" "$home/mods/compact-tabs"
+mkdir -p "$home/themes" "$home/layouts"
+for mod in $mods; do mkdir -p "$home/mods/$mod"; done
 for file in $files; do
   if [ ! -e "$home/$file" ] && [ ! -L "$home/$file" ]; then
     cp -n "$here/$file" "$home/$file"

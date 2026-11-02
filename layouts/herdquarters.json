@@ -7,6 +7,7 @@
   "type": "row",
   "theme": { "light": "paper", "dark": "night-owl" },
   "preview": "layouts/herdquarters.svg",
+  "terminal_menu": "compact-menu",
   "children": [
     {
       "id": "sidebar",
